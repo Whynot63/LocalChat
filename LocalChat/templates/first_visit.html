@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html style="height:100%;" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>LocalChat</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    <script src="static/js/cookies/cookies.min.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="static/css/normalize.css" rel="stylesheet">
+    <link href="static/css/foundation.css" rel="stylesheet">
+    <link href="static/icons/foundation-icons.css" rel="stylesheet">
+    <script src="static/js/vendor/jquery.js"></script>
+    <script src="static/js/foundation.min.js"></script>
+    <script>$(document).foundation();</script>
+    <link rel="icon" type="image/png" href="static/img/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="static/css/mainpage.css">
+</head>
+<body>
+<script type="text/javascript">
+    function login() {
+        if ($('#username').val() != '') {
+            Cookies.set('username', $('#username').val());
+        } else{
+            Cookies.set('username', 'anonimus'); 
+        }
+        location.reload();  
+    }
+
+    function checkKey (e) {
+        if (e.keyCode == 13) {
+            login();
+        }
+    }
+</script>
+<div class='logo_container'>
+    <img src="static/img/logo-first_page.png">
+</div>
+<div class='login_container'>
+    <div class='text'>
+        <h1>Первый раз на нашем сайте?</h1>
+        <div style='margin auto;' class="large-12 columns" id="name">
+            <div class="row collapse">
+                <div class="large-10 columns">
+                    <input onkeydown='checkKey(event)' type="text" id="username" placeholder="Введи свое имя/ник">
+                </div>
+                <div class="large-2 columns">
+                    <a href="#" class="button postfix" onclick="login();">Go</a>
+                </div>
+            </div>
+            <p>Серфишь инкогнито? Просто ничего не вводи!
+        </div>
+    </div>
+    <img src="static/img/cat_poo.png">
+</div>
+<div class='oth_platf'>
+    <div>
+        <img src="static/img/cat_purr.png" style='float: left; margin-right: 50px;'>
+        <div class="text">
+            <h1>А еще мы скоро запустим мобильные приложения!</h1>
+            <p>Ссылки на скачивание появятся здесь</p>
+        </div>
+    </div>
+</div>
+<div class='about_us'>
+    <div class='text'>
+        <h1>О нас</h1>
+        <p>Мы - Argon Team, команда <s>школьников</s> начинающих разработчиков. За нашей спиной не так много законченных проектов, но мы с позитивом смотрим в будующее и потихоньку начинаем свое плавание в просторах океана мировой IT-индустрии
+        </p>
+    </div>
+    <img src="static/img/ArT-logo-black.png">
+</div>
+<!--<img class='copyright' alt='ArgonTeam - Copyright 2014' src="static/img/ArT-logo.png"> -->
+</body>
+</html>
