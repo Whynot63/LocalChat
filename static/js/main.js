@@ -67,6 +67,10 @@ function run_map(coords) {
     myMap.events.add('balloonclose', function () {
         printChat();
     });
+
+    myMap.geoObjects.events.add('click', function (e) {
+        printMessages(chatpoint.indexOf(e.get('target')), 'dfd');
+    });
 }
 
 function setChat(cht_latitude, cht_longitude) {
@@ -89,7 +93,7 @@ function setChat(cht_latitude, cht_longitude) {
     printChat();
 }
 
-function setMessage(chat_id, chat_name, new_chat) {
+function setMessage(chat_id, new_chat) {
     $.ajax({
         url: path + 'set_message',
         type: 'get',
@@ -100,7 +104,7 @@ function setMessage(chat_id, chat_name, new_chat) {
         },
         success: function() {
             if (!new_chat){
-                printMessages(chat_id, chat_name);
+                printMessages(chat_id);
             }
         }
     });
@@ -117,13 +121,12 @@ function printChat() {
                     iconContent: JSON.parse(data)[cht]['fields'].chat_name}, 
                     {preset: 'islands#blueStretchyIcon', balloonCloseButton: false
                 }));
-                printMessages(cht, JSON.parse(data)[cht]['fields'].chat_name);    
             }
         }
     });
 }
 
-function printMessages(chatpoint_id, chat_name) {
+function printMessages(chatpoint_id) {
       var messages = '';
       $.ajax({
           type: 'get',
@@ -140,7 +143,7 @@ function printMessages(chatpoint_id, chat_name) {
     message = JSON.parse(message);
     messages = ["<ul class='pricing-table'>",
                 "<li class='title'>", 
-                chat_name,
+                chatpoint.get(chatpoint_id).properties.get('iconContent'),
                 "</li>",
                 "<div class='chat_container'>",
                 "<div>"].join('');
@@ -165,10 +168,10 @@ function printMessages(chatpoint_id, chat_name) {
                     "<div class='row'><div class='large-12 columns' style='padding-left: 0px;   padding-right: 0px;'>",
                     "<div class='row collapse'>",
                     "<div class='small-10 columns' style='height:40px;'>",
-                    "<input type='text' id='message' onkeydown='onKeyDownInChat(", chatpoint_id, ", ",  '"' + chat_name + '"', ", event);'>",
+                    "<input type='text' id='message' onkeydown='onKeyDownInChat(", chatpoint_id, ", event);'>",
                     "</div>",
                     "<div class='small-2 columns'>", 
-                    "<a href='#' class='large button postfix' style='margin-bottom: 0px;' onclick='checkIfEmptyInChat(", chatpoint_id, ",", chat_name, ");'>",
+                    "<a href='#' class='large button postfix' style='margin-bottom: 0px;' onclick='checkIfEmptyInChat(", chatpoint_id, ");'>",
                     "<i class='fi-comment size-72'>",
                     "</a>",
                     "</div>",
@@ -177,34 +180,34 @@ function printMessages(chatpoint_id, chat_name) {
     chatpoint.get(chatpoint_id).properties.set('balloonContentBody', messages);
 }
 
-function checkIfEmptyInChat (chatpoint_id, chat_name) {
+function checkIfEmptyInChat (chatpoint_id) {
     if($('#message').val() == '') {
         alert('Сообщение не может быть пустой строкой');
     } else {
-        setMessage(chatpoint_id, chat_name);
+        setMessage(chatpoint_id);
     }
 }
 
-function onKeyDownInChat (chatpoint_id, chat_name, e) {
+function onKeyDownInChat (chatpoint_id, e) {
     console.log(e.keyCode);
     if (e.keyCode == 13) {
-        checkIfEmptyInChat(chatpoint_id, chat_name);
+        checkIfEmptyInChat(chatpoint_id);
     }
 }
 
-function checkKeyNewChat (cht_lat, cht_long, chat_name, e) {
+function checkKeyNewChat (cht_lat, cht_long, e) {
     console.log(e.keyCode);
     if (e.keyCode == 13) {
-        checkIfEmpty(cht_lat, cht_long, chat_name);
+        checkIfEmpty(cht_lat, cht_long);
     }
 }
 
-function checkIfEmpty (cht_lat, cht_long, chat_name) {
+function checkIfEmpty (cht_lat, cht_long) {
     if ($('#chat_name').val() == '') {
         alert('Имя чата не может быть пустой строкой');
     } else if ($('#message').val() == '') {
         alert('Сообщение не может быть пустым');
     } else {
-        setChat(cht_lat, cht_long, chat_name);
+        setChat(cht_lat, cht_long);
     }
 }
