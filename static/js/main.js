@@ -38,7 +38,6 @@ function run_map(coords) {
     printChat();
 
     var balloon = null;
-
     myMap.events.add('dblclick', function (e) {
         cht_latitude = e.get('coords')[0].toPrecision(6);
         cht_longitude = e.get('coords')[1].toPrecision(6);
