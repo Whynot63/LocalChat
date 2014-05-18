@@ -1,5 +1,6 @@
 div.logo_container {
 	background-color: rgb(25, 175, 255);
+	/*background-color: rgb(140, 140, 140);*/
 	text-align: center;
 }
 
@@ -28,7 +29,12 @@ div.login_container img {
 }
 
 div.oth_platf {
-	background-color: orange;
+	/*background-color: orange;*/
+	border-width: 0px;
+	border-top-width: 10px;
+	border-bottom-width: 10px;
+	border-style: dashed;
+	border-color: rgb(200, 200, 200);
 }
 
 div.oth_platf div {

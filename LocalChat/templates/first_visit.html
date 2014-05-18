@@ -19,8 +19,9 @@
     function login() {
         if ($('#username').val() != '') {
             Cookies.set('username', $('#username').val());
+            Cookies.set('old_username', $('#username').val());
         } else{
-            Cookies.set('username', 'anonimus'); 
+            Cookies.set('username', 'anonimous'); 
         }
         location.reload();  
     }
@@ -30,6 +31,11 @@
             login();
         }
     }
+
+    $(document).ready(function() {
+        var prev_nick = Cookies.get('old_username');
+        $('#username').val(prev_nick);
+    });
 </script>
 <div class='logo_container'>
     <img src="static/img/logo-first_page.png">
