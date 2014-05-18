@@ -79,3 +79,41 @@ div.yashare-auto-init {
 div.chat_container div li:nth-child(even) {
 	background-color: #ddd;
 }
+
+div.back_button{
+	z-index: 1;
+	position: fixed;
+	right: 142px;
+	top: 10px;
+	height: 28px;
+	cursor: pointer;
+	border-style: solid;
+	border-radius: 5px;
+	border-width: 1px;
+	border-color: white;
+	box-shadow: 0 1px 0 rgba(255, 255, 255, .07);
+
+	background: #555;
+	background: -webkit-linear-gradient(top,#777 0,#555 100%);
+	background: -moz-linear-gradient(top,#777 0,#555 100%);
+	background: -o-linear-gradient(top,#777 0,#555 100%);
+	background: linear-gradient(to bottom,#777 0,#555 100%);
+	-moz-box-shadow: 0 1px 0 rgba(0,0,0,.07);
+	opacity: 0;
+}
+
+div.back_button:hover {
+	background: #777;
+}
+
+div.back_button div {
+	font-size: 13px;
+	font-weight: bold;
+	color: white;
+	margin: 7px;
+}
+
+.ymaps-map {
+	width:100%!important;
+	height:100%!important;
+}
