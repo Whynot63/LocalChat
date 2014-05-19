@@ -13,17 +13,20 @@
     <script>$(document).foundation();</script>
     <link rel="icon" type="image/png" href="static/img/favicon.ico">
     <link rel="stylesheet" type="text/css" href="static/css/mainpage.css">
+    <script type="text/javascript" src='static/js/localstorage.js'></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 <script type="text/javascript">
     function login() {
         if ($('#username').val() != '') {
             Cookies.set('username', $('#username').val());
-            Cookies.set('old_username', $('#username').val());
+            update_LS();
         } else{
-            Cookies.set('username', 'anonimous'); 
+            Cookies.set('username', 'anonimous');
+            clear_LS();
         }
-        location.reload();  
+        location.reload();
     }
 
     function checkKey (e) {
@@ -33,7 +36,8 @@
     }
 
     $(document).ready(function() {
-        var prev_nick = Cookies.get('old_username');
+        is_LS_available();
+        var prev_nick = extract_from_LS();
         $('#username').val(prev_nick);
     });
 </script>
@@ -45,10 +49,10 @@
         <h1>Первый раз на нашем сайте?</h1>
         <div style='margin auto;' class="large-12 columns" id="name">
             <div class="row collapse">
-                <div class="large-10 columns">
+                <div class="small-10 columns">
                     <input onkeydown='checkKey(event)' type="text" id="username" placeholder="Введи свое имя/ник">
                 </div>
-                <div class="large-2 columns">
+                <div class="small-2 columns">
                     <a href="#" class="button postfix" onclick="login();">Go</a>
                 </div>
             </div>

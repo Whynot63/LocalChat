@@ -69,3 +69,66 @@ div.about_us div {
 	display: inline-block;
 	width: 50%;
 }
+
+
+/* And now for mobile */
+@media (max-device-width : 800px) {
+	img {
+		display: none!important;
+	}
+
+	body {
+		width: 100%!important;
+		min-width: 275px;
+		padding: 0px;
+	}
+
+	.logo_container img {
+		display: block!important;
+		width: 100%!important;
+		margin: auto;
+	}
+
+	.login_container {
+		width: 100%!important;
+		padding: 0px!important;
+		margin: 0px!important;
+	}
+
+	.login_container div {
+		width: 100%!important;
+		margin: 0px!important;
+	}
+
+	div.row.collapse {
+		width: 100%;
+	}
+
+	.oth_platf {
+		width: 100%!important;		
+	}
+
+	.oth_platf div {
+		width: 100%!important;
+		padding-left: 0px!important;
+		padding-right: 0px!important;
+	}
+
+	.oth_platf div div {
+		width: 90%!important;
+		margin: auto!important;
+		min-height: inherit!important;
+	}
+
+	.about_us {
+		width: 100%!important;
+		float: none!important;
+	}
+
+	.about_us div {
+		width: 90%!important;
+		margin: auto!important;
+		min-height: inherit!important;
+		display: block!important;
+	}
+}
