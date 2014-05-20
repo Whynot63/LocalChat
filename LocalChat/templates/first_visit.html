@@ -14,13 +14,14 @@
     <link rel="icon" type="image/png" href="static/img/favicon.ico">
     <link rel="stylesheet" type="text/css" href="static/css/mainpage.css">
     <script type="text/javascript" src='static/js/localstorage.js'></script>
+    <script type="text/javascript" src='/static/js/replace-all.js'></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 <script type="text/javascript">
     function login() {
-        if ($('#username').val() != '') {
-            Cookies.set('username', $('#username').val());
+        if ($('#username').val().replaceAll(' ', '') != '') {
+            Cookies.set('username', $('#username').val().replaceAll('<', '&lt;').replaceAll('>', '&gt;'));
             update_LS();
         } else{
             Cookies.set('username', 'anonimous');

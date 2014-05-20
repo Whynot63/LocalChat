@@ -72,7 +72,7 @@ div.about_us div {
 
 
 /* And now for mobile */
-@media (max-device-width : 800px) {
+@media screen and (max-device-width:800px) {
 	img {
 		display: none!important;
 	}

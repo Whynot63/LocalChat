@@ -31,7 +31,7 @@ function run_map(coords) {
         controls: ['fullscreenControl', 'geolocationControl', 'typeSelector', 'zoomControl']
     }); 
 
-    myMap.behaviors.disable(["dblClickZoom", "rightMouseButtonMagnifier", "multiTouch"]);
+    myMap.behaviors.disable(["dblClickZoom", "rightMouseButtonMagnifier"]);
 
     chatpoint = new ymaps.GeoObjectCollection({}, {});
     myMap.geoObjects.add(chatpoint);
@@ -73,8 +73,12 @@ function run_map(coords) {
 }
 
 function setChat(cht_latitude, cht_longitude) {
+    var new_chat_name = $('#chat_name').val();
+    new_chat_name = new_chat_name.replaceAll('<', '&lt;');
+    new_chat_name = new_chat_name.replaceAll('>', '&gt;');
+
     chatpoint.add(new ymaps.Placemark([cht_latitude, cht_longitude], {
-                    iconContent: $('#chat_name').val()}, 
+                    iconContent: new_chat_name}, 
                     {preset: 'islands#blueStretchyIcon', balloonCloseButton: false}
                     ));
 
@@ -84,7 +88,7 @@ function setChat(cht_latitude, cht_longitude) {
         data: {
             'x': cht_latitude,
             'y': cht_longitude,
-            'chat_name': $('#chat_name').val()
+            'chat_name': new_chat_name
         }
     });
     setMessage(chatpoint.getLength() - 1, true);
@@ -93,12 +97,16 @@ function setChat(cht_latitude, cht_longitude) {
 }
 
 function setMessage(chat_id, new_chat) {
+    var new_message = $('#message').val();
+    new_message = new_message.replaceAll('<', '&lt;');
+    new_message = new_message.replaceAll('>', '&gt;');
+
     $.ajax({
         url: path + 'set_message',
         type: 'get',
         data: {
             'chat_id': chat_id,
-            'message': $('#message').val(),
+            'message': new_message,
             'author': Cookies.get('username')
         },
         success: function() {
@@ -180,7 +188,7 @@ function printMessages(chatpoint_id) {
 }
 
 function checkIfEmptyInChat (chatpoint_id) {
-    if($('#message').val() == '') {
+    if($('#message').val().replaceAll(' ', '') == '') {
         alert('Сообщение не может быть пустой строкой');
     } else {
         setMessage(chatpoint_id);
@@ -188,21 +196,19 @@ function checkIfEmptyInChat (chatpoint_id) {
 }
 
 function onKeyDownInChat (chatpoint_id, e) {
-    console.log(e.keyCode);
     if (e.keyCode == 13) {
         checkIfEmptyInChat(chatpoint_id);
     }
 }
 
 function checkKeyNewChat (cht_lat, cht_long, e) {
-    console.log(e.keyCode);
     if (e.keyCode == 13) {
         checkIfEmpty(cht_lat, cht_long);
     }
 }
 
 function checkIfEmpty (cht_lat, cht_long) {
-    if ($('#chat_name').val() == '') {
+    if ($('#chat_name').val().replaceAll(' ', '') == '') {
         alert('Имя чата не может быть пустой строкой');
     } else if ($('#message').val() == '') {
         alert('Сообщение не может быть пустым');
