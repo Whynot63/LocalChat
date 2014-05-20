@@ -17,7 +17,8 @@ div.main_container {
 }
 
 div.chat_container {
-	overflow: scroll;
+	overflow-x: hidden;
+	overflow-y: scroll;
 	height: 306px;
 	max-width: 398px;
 }

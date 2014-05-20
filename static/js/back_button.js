@@ -1,9 +1,11 @@
 $(document).on("click", ".back_button", function() {
-	Cookies.set('old_username', Cookies.get('username'));
-	Cookies.expire('username');
-	if(Cookies.get('old_username') == 'anonimous') {
-		Cookies.expire('old_username');
+	is_LS_available();
+	if(Cookies.get('username') != 'anonimous') {
+		update_LS();
+	} else {
+		clear_LS();
 	}
+	Cookies.expire('username');
 	location.reload();
 });
 
