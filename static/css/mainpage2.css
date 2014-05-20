@@ -1,0 +1,14 @@
+body {
+	text-align: center;
+}
+
+div.login_logo {
+	position: relative;
+	top: 20%;
+	margin: auto;
+	width: 40%;
+}
+
+h1 {
+	font-size: 30px;
+}
